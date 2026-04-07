@@ -108,4 +108,122 @@ Explica brevemente qué ocurre en cada uno de estos pasos.
 
 - **max_iter=1000:** Le da al modelo de riesgo 1000 "oportunidades" de ajustar sus cálculos internos hasta encontrar la solución más precisa.
 
-## 🚀 Plan de trabajo
+# 🚀 Plan de trabajo (3 semanas)
+
+## 🗓️ Semana 1: Expansión de features y mejora del dataset
+
+**🎯 Objetivo:** Enriquecer la calidad de los datos para mejorar la capacidad predictiva del modelo.
+
+### 🔧 Tareas
+
+- 📊 **Ampliar dataset**
+  - Crear mínimo 50–100 registros sintéticos o reales
+  - Incluir variedad en:
+    - Tamaños (Story Points)
+    - Experiencia
+    - Rendimiento
+
+- 🧠 **Agregar nuevas features clave**
+  - ⏳ **Complejidad técnica (1–5)** → lógica, algoritmos, integraciones
+  - 🔗 **Número de dependencias** → cuántas tareas externas afectan esta
+  - 👥 **Cantidad de desarrolladores asignados**
+  - 🧩 **Tipo de tarea** (Backend, Frontend, DevOps, QA)
+  - 📅 **Urgencia/prioridad** (Baja, Media, Alta)
+
+- 🔄 **Preprocesamiento de datos**
+  - Normalización de variables numéricas
+  - Codificación de variables categóricas (One-Hot Encoding o Label Encoding)
+
+- 📈 **Análisis exploratorio (EDA)**
+  - Correlación entre variables
+  - Identificar patrones:
+    - ¿Mayor tamaño → más subtareas?
+    - ¿Más experiencia → menos tiempo?
+
+---
+
+## 🗓️ Semana 2: Implementación de nuevos modelos
+
+**🎯 Objetivo:** Mejorar la precisión comparando múltiples modelos de Machine Learning.
+
+### 🤖 Modelos a implementar
+
+#### 🔢 Para regresión (y_tasks, y_time)
+- 📉 Regresión Lineal (baseline)
+- 🌲 Random Forest Regressor
+- ⚡ Gradient Boosting Regressor
+- 🔍 Support Vector Regressor (SVR)
+
+#### 🧠 Para clasificación (y_risk)
+- 📊 Logistic Regression (baseline)
+- 🌲 Random Forest Classifier
+- ⚡ Gradient Boosting Classifier
+- 🧩 K-Nearest Neighbors (KNN)
+
+---
+
+### 🔧 Tareas
+
+- 🧪 Entrenar cada modelo con el dataset mejorado
+- ⚖️ Evaluar desempeño:
+  - Regresión:
+    - MAE (Error absoluto medio)
+    - RMSE
+  - Clasificación:
+    - Accuracy
+    - Precision / Recall
+    - Matriz de confusión
+
+- 📊 Comparar resultados entre modelos
+- 🏆 Seleccionar los mejores modelos para cada variable objetivo
+
+---
+
+## 🗓️ Semana 3: Optimización y simulación del sistema inteligente
+
+**🎯 Objetivo:** Afinar el modelo y simular su uso en escenarios reales.
+
+### 🔧 Tareas
+
+- ⚙️ **Optimización de hiperparámetros**
+  - GridSearch o RandomSearch
+  - Ajustar:
+    - Número de árboles (Random Forest)
+    - Profundidad
+    - Learning rate
+
+- 🧪 **Validación cruzada (Cross-validation)**
+  - Asegurar que el modelo generaliza bien
+
+- 🧠 **Simulación del sistema**
+  - Crear inputs nuevos (historias de usuario ficticias)
+  - Obtener predicciones:
+    - Número de subtareas
+    - Tiempo estimado
+    - Riesgo
+
+- 🖥️ **Prototipo simple (opcional pero recomendado)**
+  - Interfaz básica:
+    - Formulario de entrada
+    - Mostrar predicciones
+  - Puede ser en:
+    - HTML + JS
+    - o consola Python
+
+- 📦 **Documentación del modelo**
+  - Cómo funciona
+  - Qué variables usa
+  - Qué modelo se eligió y por qué
+
+---
+
+# 📌 Resultado esperado al final de las 3 semanas
+
+✔️ Modelo más preciso y robusto  
+✔️ Dataset más completo y representativo  
+✔️ Comparación clara entre múltiples algoritmos  
+✔️ Sistema capaz de:
+
+- Dividir tareas automáticamente 🧩  
+- Estimar tiempos ⏱️  
+- Predecir riesgos 🚨  

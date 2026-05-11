@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter
 from app.schemas.config import ConfigResponse, ConfigUpdate
 from app.services.config_service import config_service

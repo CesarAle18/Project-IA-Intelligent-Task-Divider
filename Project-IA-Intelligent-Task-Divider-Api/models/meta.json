@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-05-02 16:42:39",
+  "ganadores": [
+    "LinearRegression",
+    "LinearRegression",
+    "LightGBM"
+  ],
+  "features": [
+    "SP",
+    "Experiencia",
+    "Rendimiento",
+    "Complejidad",
+    "Dependencias",
+    "TipoTarea",
+    "Urgencia"
+  ]
+}

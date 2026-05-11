@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+.env
+*.pkl
+models/pipe_*.pkl

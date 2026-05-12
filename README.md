@@ -182,52 +182,52 @@ Lectura de dataset desde CSV (clave)
 
 ## Calidad de datos
 
-- [ ] Detectar y tratar outliers con IQR en columnas `SP`, `Complejidad` y `Dependencias`
-- [ ] Agregar validación de tipos de datos por columna antes de la limpieza
+- Detectar y tratar outliers con IQR en columnas `SP`, `Complejidad` y `Dependencias`
+- Agregar validación de tipos de datos por columna antes de la limpieza
 
 ---
 
 ## Logs y Pipeline
 
-- [ ] Guardar reporte completo de limpieza (filas eliminadas por criterio) en archivo de log
-- [ ] Construir pipeline unificado de sklearn (`Pipeline`) que encadene preprocesamiento + escalado + modelo
+- Guardar reporte completo de limpieza (filas eliminadas por criterio) en archivo de log
+- Construir pipeline unificado de sklearn (`Pipeline`) que encadene preprocesamiento + escalado + modelo
 
 ---
 
 ##  Nuevos modelos
 
-- [ ] Probar modelos Random Forest y Gradient Boosting (XGBoost/LightGBM) para las tres variables objetivo
-- [ ] Comparar resultados contra la regresión lineal/logística actual
+- Probar modelos Random Forest y Gradient Boosting (XGBoost/LightGBM) para las tres variables objetivo
+- Comparar resultados contra la regresión lineal/logística actual
 
 ---
 
 ## Validación y métricas
 
-- [ ] Implementar validación cruzada k-fold en lugar del único split 80/20
-- [ ] Agregar métricas adicionales: RMSE y MAPE para regresión; matriz de confusión, F1, precisión y recall para clasificación
-- [ ] Exportar reporte de métricas en CSV al Drive para historial de experimentos
+- Implementar validación cruzada k-fold en lugar del único split 80/20
+- Agregar métricas adicionales: RMSE y MAPE para regresión; matriz de confusión, F1, precisión y recall para clasificación
+- Exportar reporte de métricas en CSV al Drive para historial de experimentos
 
 ---
 
 ## Persistencia del modelo
 
-- [ ] Serializar y guardar los tres modelos entrenados con `joblib` en Google Drive
-- [ ] Agregar celda de carga de modelos ya entrenados como alternativa al entrenamiento completo
+- Serializar y guardar los tres modelos entrenados con `joblib` en Google Drive
+- Agregar celda de carga de modelos ya entrenados como alternativa al entrenamiento completo
 
 ---
 
 ## Bug fix y predicción mejorada
 
-- [ ] Corregir bug: variable `Rendimiento_Equipo` no definida en sección 8 (debe ser `Rendimiento`)
-- [ ]  Mostrar probabilidad por clase del riesgo usando `predict_proba` en lugar de solo la etiqueta ganadora
-- [ ]Validar datos de entrada del usuario antes de predecir, con mensajes de error descriptivos
+- Corregir bug: variable `Rendimiento_Equipo` no definida en sección 8 (debe ser `Rendimiento`)
+- Mostrar probabilidad por clase del riesgo usando `predict_proba` en lugar de solo la etiqueta ganadora
+- Validar datos de entrada del usuario antes de predecir, con mensajes de error descriptivos
 
 ---
 
 ## Estructura y mantenibilidad
 
-- [ ] Modularizar el código en funciones reutilizables: `cargar_datos()`, `preprocesar()`, `entrenar()`, `predecir()`
-- [ ] Agregar bloque de configuración centralizada al inicio del notebook (rutas, hiperparámetros, columnas
+- Modularizar el código en funciones reutilizables: `cargar_datos()`, `preprocesar()`, `entrenar()`, `predecir()`
+- Agregar bloque de configuración centralizada al inicio del notebook (rutas, hiperparámetros, columnas
 
 ---
 
@@ -330,18 +330,123 @@ La configuración debe serializarse en un archivo JSON en disco.
 
 ---
 
-### Semana 2 — Frontend Next.js + Integración completa
+# Semana 2 — Frontend Next.js + Integración completa
 
-**Objetivo:** Construir la interfaz, conectarla al backend y dejarlo todo funcionando localmente.
+## Objetivo
+Construir la interfaz, conectarla al backend y dejarlo todo funcionando localmente.
 
-**Setup del proyecto Next.js y estructura de páginas** Inicializar el proyecto con `create-next-app`, configurar Tailwind CSS, instalar `axios` o `fetch` para las llamadas a la API, y definir el layout base con una barra de navegación lateral con las 4 secciones: Predicción, Dashboard, Historial y Configuración.
+---
 
-**Formulario de predicción** Construir el formulario con los 7 campos (sliders, selects, inputs numéricos), conectarlo a `POST /predecir`, y mostrar los resultados en tarjetas: sub-tareas con intervalo de confianza, tiempo estimado con intervalo, nivel de riesgo con barra de probabilidades por clase.
+## Setup del proyecto Next.js y estructura de páginas
+Inicializar el proyecto con `create-next-app`, configurar Tailwind CSS, instalar `axios` o utilizar `fetch` para las llamadas a la API, y definir el layout base con una barra de navegación lateral que contenga las siguientes secciones:
 
-**Dashboard de métricas y gráficas** Construir la vista de métricas usando una librería de gráficas (Recharts o Chart.js). Visualizar: evolución temporal de MAE/R² de regresión, evolución de F1/Accuracy de clasificación, y comparativa de modelos ganadores a lo largo del tiempo. Conectar a `GET /metricas`.
+- Predicción
+- Dashboard
+- Historial
+- Configuración
 
-**Historial de predicciones** Construir una tabla paginada con todas las predicciones almacenadas en MySQL, con columnas para los inputs clave y los tres outputs. Agregar un panel lateral o modal de detalle al hacer clic en una fila. Conectar a `GET /historial`.
+---
 
-**Página de configuración del modelo** Construir un editor visual del `CONFIG`: campos editables para rangos válidos, columnas de outliers y parámetros de K-Fold. Al guardar, llamar a `PUT /config` y mostrar confirmación. Incluir una sección de solo lectura con los modelos ganadores del último entrenamiento.
+## Formulario de predicción
+Construir el formulario con los 7 campos necesarios utilizando:
 
-**Integración final, pruebas end-to-end y ajustes** Probar el flujo completo: formulario → predicción → guardado en MySQL → aparece en historial → métricas actualizadas. Corregir bugs de integración, ajustar estilos responsive, y documentar cómo levantar el proyecto localmente (`README.md` con comandos para backend y frontend).
+- Sliders
+- Selects
+- Inputs numéricos
+
+Conectar el formulario al endpoint:
+
+### POST `/predecir`
+
+Mostrar los resultados en tarjetas visuales incluyendo:
+
+- Sub-tareas con intervalo de confianza
+- Tiempo estimado con intervalo de confianza
+- Nivel de riesgo con barra de probabilidades por clase
+
+---
+
+## Dashboard de métricas y gráficas
+Construir la vista de métricas utilizando una librería de gráficas como:
+
+- Recharts
+- Chart.js
+
+Visualizar las siguientes métricas:
+
+- Evolución temporal de MAE y R² de regresión
+- Evolución de F1 y Accuracy de clasificación
+- Comparativa de modelos ganadores a lo largo del tiempo
+
+Conectar la vista al endpoint:
+
+### GET `/metricas`
+
+---
+
+## Historial de predicciones
+Construir una tabla paginada con todas las predicciones almacenadas en MySQL.
+
+La tabla debe incluir:
+
+- Inputs clave del usuario
+- Outputs generados por los modelos
+
+Agregar:
+
+- Panel lateral
+  o
+- Modal de detalle
+
+al hacer clic sobre una fila.
+
+Conectar al endpoint:
+
+### GET `/historial`
+
+---
+
+## Página de configuración del modelo
+Construir un editor visual del objeto `CONFIG` con:
+
+- Campos editables para rangos válidos
+- Configuración de columnas de outliers
+- Parámetros de K-Fold
+
+Al guardar cambios:
+
+### PUT `/config`
+
+Mostrar una confirmación visual de actualización exitosa.
+
+Incluir además una sección de solo lectura con:
+
+- Modelos ganadores del último entrenamiento
+
+---
+
+## Integración final, pruebas end-to-end y ajustes
+Probar el flujo completo de la aplicación:
+
+1. Formulario
+2. Predicción
+3. Guardado en MySQL
+4. Aparición en historial
+5. Actualización de métricas
+
+Realizar:
+
+- Corrección de bugs de integración
+- Ajustes responsive de estilos
+- Optimización visual y funcional
+
+Documentar cómo levantar el proyecto localmente mediante un archivo:
+
+### `README.md`
+
+Incluyendo:
+
+- Comandos para ejecutar el backend
+- Comandos para ejecutar el frontend
+- Variables de entorno necesarias
+- Pasos de instalación y ejecución

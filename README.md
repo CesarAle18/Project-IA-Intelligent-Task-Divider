@@ -370,7 +370,6 @@ Mostrar los resultados en tarjetas visuales incluyendo:
 Construir la vista de métricas utilizando una librería de gráficas como:
 
 - Recharts
-- Chart.js
 
 Visualizar las siguientes métricas:
 

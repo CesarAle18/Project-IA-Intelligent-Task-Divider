@@ -112,29 +112,29 @@ Explica brevemente qué ocurre en cada uno de estos pasos.
 
 ## 🗓️ Semana 1: Expansión de features y mejora del dataset
 
-**🎯 Objetivo:** Enriquecer la calidad de los datos para mejorar la capacidad predictiva del modelo.
+**Objetivo:** Enriquecer la calidad de los datos para mejorar la capacidad predictiva del modelo.
 
 ### 🔧 Tareas
 
-- 📊 **Ampliar dataset**
+- **Ampliar dataset**
   - Crear mínimo 50–100 registros sintéticos o reales
   - Incluir variedad en:
     - Tamaños (Story Points)
     - Experiencia
     - Rendimiento
 
-- 🧠 **Agregar nuevas features clave**
-  - ⏳ **Complejidad técnica (1–5)** → lógica, algoritmos, integraciones
-  - 🔗 **Número de dependencias** → cuántas tareas externas afectan esta
-  - 👥 **Cantidad de desarrolladores asignados**
-  - 🧩 **Tipo de tarea** (Backend, Frontend, DevOps, QA)
-  - 📅 **Urgencia/prioridad** (Baja, Media, Alta)
+- **Agregar nuevas features clave**
+  - **Complejidad técnica (1–5)** → lógica, algoritmos, integraciones
+  - **Número de dependencias** → cuántas tareas externas afectan esta
+  - **Cantidad de desarrolladores asignados**
+  - **Tipo de tarea** (Backend, Frontend, DevOps, QA)
+  - **Urgencia/prioridad** (Baja, Media, Alta)
 
-- 🔄 **Preprocesamiento de datos**
+- **Preprocesamiento de datos**
   - Normalización de variables numéricas
   - Codificación de variables categóricas (One-Hot Encoding o Label Encoding)
 
-- 📈 **Análisis exploratorio (EDA)**
+- **Análisis exploratorio (EDA)**
   - Correlación entre variables
   - Identificar patrones:
     - ¿Mayor tamaño → más subtareas?
@@ -142,78 +142,92 @@ Explica brevemente qué ocurre en cada uno de estos pasos.
 
 ---
 
-## 🗓️ Semana 2: Implementación de nuevos modelos
+🗓️ Semana 2: Integración de datos y automatización básica (Google Colab)
+🎯 Objetivo: Hacer que el modelo deje de depender de datos hardcodeados y pueda trabajar con datasets externos (CSV).
 
-**🎯 Objetivo:** Mejorar la precisión comparando múltiples modelos de Machine Learning.
+🔧 Tareas
 
-### 🤖 Modelos a implementar
+Lectura de dataset desde CSV (clave)
 
-#### 🔢 Para regresión (y_tasks, y_time)
-- 📉 Regresión Lineal (baseline)
-- 🌲 Random Forest Regressor
-- ⚡ Gradient Boosting Regressor
-- 🔍 Support Vector Regressor (SVR)
+- Subir archivo a Google Colab (files.upload() o Google Drive)
+  - Leer dataset con pandas.read_csv()
+  - Validar estructura:
+  - Columnas correctas
+  - Tipos de datos (numéricos vs categóricos)
+  - Limpieza básica
 
-#### 🧠 Para clasificación (y_risk)
-- 📊 Logistic Regression (baseline)
-- 🌲 Random Forest Classifier
-- ⚡ Gradient Boosting Classifier
-- 🧩 K-Nearest Neighbors (KNN)
+- Manejo de valores nulos
+  - Eliminación de duplicados
+  - Validación de rangos (ej: rendimiento entre 0–1)
+  - Adaptar pipeline actual
+
+- Reemplazar raw_data por lectura desde CSV
+  - Mantener:
+  - Encoding (Label + OneHot)
+  - Escalado (StandardScaler)
+  - Asegurar que todo funcione igual pero con datos externos
+
+- Persistencia simple (opcional pero recomendado)
+
+- Guardar dataset limpio como nuevo CSV
+- Versionar datasets (ej: dataset_v2.csv)
+  - Prueba rápida
+
+- Ejecutar entrenamiento completo desde CSV
+- Validar que métricas sigan siendo coherentes
 
 ---
 
-### 🔧 Tareas
+### 🗓️ Semana 3: Optimización y simulación del sistema inteligente
 
-- 🧪 Entrenar cada modelo con el dataset mejorado
-- ⚖️ Evaluar desempeño:
-  - Regresión:
-    - MAE (Error absoluto medio)
-    - RMSE
-  - Clasificación:
-    - Accuracy
-    - Precision / Recall
-    - Matriz de confusión
+## Calidad de datos
 
-- 📊 Comparar resultados entre modelos
-- 🏆 Seleccionar los mejores modelos para cada variable objetivo
+- [ ] Detectar y tratar outliers con IQR en columnas `SP`, `Complejidad` y `Dependencias`
+- [ ] Agregar validación de tipos de datos por columna antes de la limpieza
 
 ---
 
-## 🗓️ Semana 3: Optimización y simulación del sistema inteligente
+## Logs y Pipeline
 
-**🎯 Objetivo:** Afinar el modelo y simular su uso en escenarios reales.
+- [ ] Guardar reporte completo de limpieza (filas eliminadas por criterio) en archivo de log
+- [ ] Construir pipeline unificado de sklearn (`Pipeline`) que encadene preprocesamiento + escalado + modelo
 
-### 🔧 Tareas
+---
 
-- ⚙️ **Optimización de hiperparámetros**
-  - GridSearch o RandomSearch
-  - Ajustar:
-    - Número de árboles (Random Forest)
-    - Profundidad
-    - Learning rate
+##  Nuevos modelos
 
-- 🧪 **Validación cruzada (Cross-validation)**
-  - Asegurar que el modelo generaliza bien
+- [ ] Probar modelos Random Forest y Gradient Boosting (XGBoost/LightGBM) para las tres variables objetivo
+- [ ] Comparar resultados contra la regresión lineal/logística actual
 
-- 🧠 **Simulación del sistema**
-  - Crear inputs nuevos (historias de usuario ficticias)
-  - Obtener predicciones:
-    - Número de subtareas
-    - Tiempo estimado
-    - Riesgo
+---
 
-- 🖥️ **Prototipo simple (opcional pero recomendado)**
-  - Interfaz básica:
-    - Formulario de entrada
-    - Mostrar predicciones
-  - Puede ser en:
-    - HTML + JS
-    - o consola Python
+## Validación y métricas
 
-- 📦 **Documentación del modelo**
-  - Cómo funciona
-  - Qué variables usa
-  - Qué modelo se eligió y por qué
+- [ ] Implementar validación cruzada k-fold en lugar del único split 80/20
+- [ ] Agregar métricas adicionales: RMSE y MAPE para regresión; matriz de confusión, F1, precisión y recall para clasificación
+- [ ] Exportar reporte de métricas en CSV al Drive para historial de experimentos
+
+---
+
+## Persistencia del modelo
+
+- [ ] Serializar y guardar los tres modelos entrenados con `joblib` en Google Drive
+- [ ] Agregar celda de carga de modelos ya entrenados como alternativa al entrenamiento completo
+
+---
+
+## Bug fix y predicción mejorada
+
+- [ ] Corregir bug: variable `Rendimiento_Equipo` no definida en sección 8 (debe ser `Rendimiento`)
+- [ ]  Mostrar probabilidad por clase del riesgo usando `predict_proba` en lugar de solo la etiqueta ganadora
+- [ ]Validar datos de entrada del usuario antes de predecir, con mensajes de error descriptivos
+
+---
+
+## Estructura y mantenibilidad
+
+- [ ] Modularizar el código en funciones reutilizables: `cargar_datos()`, `preprocesar()`, `entrenar()`, `predecir()`
+- [ ] Agregar bloque de configuración centralizada al inicio del notebook (rutas, hiperparámetros, columnas
 
 ---
 
@@ -226,4 +240,108 @@ Explica brevemente qué ocurre en cada uno de estos pasos.
 
 - Dividir tareas automáticamente 🧩  
 - Estimar tiempos ⏱️  
-- Predecir riesgos 🚨  
+- Predecir riesgos 🚨
+
+---
+
+# Plan de Trabajo UI + API
+
+Stack definido
+Next.js + Tailwind CSS → FastAPI → MySQL + .pkl cargado en memoria
+
+# Semana 1 — Backend + Integración del Modelo
+
+## Objetivo
+Tener la API 100% funcional antes de tocar el frontend.
+
+---
+
+## Configuración del entorno y estructura del proyecto
+Crear la estructura de carpetas del proyecto (`/backend`, `/frontend`), configurar el entorno virtual de Python, instalar dependencias de FastAPI (`fastapi`, `uvicorn`, `sqlalchemy`, `pymysql`, `joblib`, `scikit-learn`, `pandas`), y verificar que los tres archivos `.pkl` cargan correctamente en memoria al iniciar el servidor.
+
+---
+
+## Diseño e implementación de la base de datos MySQL
+Crear la base de datos local, diseñar y crear dos tablas:
+
+- `predicciones`
+  - Almacena el historial de predicciones:
+    - Inputs del usuario
+    - Outputs del modelo
+    - Timestamp
+
+- `metricas_modelo`
+  - Almacena:
+    - MAE
+    - RMSE
+    - R²
+    - F1
+    - Ganadores
+    - Timestamp
+
+Configurar SQLAlchemy con los modelos ORM correspondientes y probar la conexión con la base de datos.
+
+---
+
+## Endpoints de predicción e historial
+
+### POST `/predecir`
+- Recibe los 7 parámetros del formulario.
+- Ejecuta los tres pipelines del modelo.
+- Guarda el resultado en MySQL.
+
+### GET `/historial`
+- Devuelve el historial de predicciones.
+- Implementar paginación básica.
+
+### GET `/historial/{id}`
+- Devuelve el detalle completo de una predicción específica.
+
+---
+
+## Endpoints de métricas y configuración
+
+### GET `/metricas`
+- Devuelve el historial de métricas del modelo.
+- Los datos pueden leerse desde:
+  - `metricas_historial.csv`
+  - o desde la tabla MySQL.
+
+### GET `/config`
+- Devuelve la configuración actual del sistema.
+
+### PUT `/config`
+- Permite editar los parámetros del `CONFIG dict`:
+  - Rangos
+  - Columnas
+  - Hiperparámetros
+
+La configuración debe serializarse en un archivo JSON en disco.
+
+---
+
+## Pruebas del backend y documentación Swagger
+- Probar todos los endpoints desde la UI automática de FastAPI (`/docs`).
+- Validar los schemas de entrada y salida con Pydantic.
+- Asegurar el manejo de errores:
+  - Entradas inválidas
+  - Modelo no cargado
+- Dejar el backend completamente listo para ser consumido por el frontend.
+
+---
+
+### Semana 2 — Frontend Next.js + Integración completa
+
+**Objetivo:** Construir la interfaz, conectarla al backend y dejarlo todo funcionando localmente.
+
+**Setup del proyecto Next.js y estructura de páginas** Inicializar el proyecto con `create-next-app`, configurar Tailwind CSS, instalar `axios` o `fetch` para las llamadas a la API, y definir el layout base con una barra de navegación lateral con las 4 secciones: Predicción, Dashboard, Historial y Configuración.
+
+**Formulario de predicción** Construir el formulario con los 7 campos (sliders, selects, inputs numéricos), conectarlo a `POST /predecir`, y mostrar los resultados en tarjetas: sub-tareas con intervalo de confianza, tiempo estimado con intervalo, nivel de riesgo con barra de probabilidades por clase.
+
+**Dashboard de métricas y gráficas** Construir la vista de métricas usando una librería de gráficas (Recharts o Chart.js). Visualizar: evolución temporal de MAE/R² de regresión, evolución de F1/Accuracy de clasificación, y comparativa de modelos ganadores a lo largo del tiempo. Conectar a `GET /metricas`.
+
+**Historial de predicciones** Construir una tabla paginada con todas las predicciones almacenadas en MySQL, con columnas para los inputs clave y los tres outputs. Agregar un panel lateral o modal de detalle al hacer clic en una fila. Conectar a `GET /historial`.
+
+**Página de configuración del modelo** Construir un editor visual del `CONFIG`: campos editables para rangos válidos, columnas de outliers y parámetros de K-Fold. Al guardar, llamar a `PUT /config` y mostrar confirmación. Incluir una sección de solo lectura con los modelos ganadores del último entrenamiento.
+
+**Integración final, pruebas end-to-end y ajustes** Probar el flujo completo: formulario → predicción → guardado en MySQL → aparece en historial → métricas actualizadas. Corregir bugs de integración, ajustar estilos responsive, y documentar cómo levantar el proyecto localmente (`README.md` con comandos para backend y frontend).
